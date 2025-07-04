@@ -1,14 +1,10 @@
-const express = require('express');
-const { mongo } = require('mongoose');
+import app from './app.js';
+import connectDB from './config/db.js';
 
-// Create an Express application
-const app = express();
+const PORT = process.env.PORT || 5000;
 
-//routes
-app.get('/', (req, res) => {
-  res.json({mssg:'Hello World!'});
-
-//listen for requests
-app.listen(4000, () => {
-  console.log('Server is running on http://localhost:4000');
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 });
